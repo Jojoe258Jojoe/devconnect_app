@@ -466,8 +466,8 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors">
-                  Blog
+                <a href="https://jojoeportfolio.netlify.app" className="text-gray-400 hover:text-primary-400 transition-colors">
+                  Portfolio/blog
                 </a>
               </li>
             </ul>
@@ -479,11 +479,11 @@ const Footer = () => {
             <ul className="space-y-2">
               <li className="flex items-center space-x-2 text-gray-400">
                 <Mail className="h-4 w-4" />
-                <span>tinyejoe7@gmail.com</span>
+                <span><a href="mailto:tinyejoe7@gmail.com">tinyejoe7@gmail.com</a></span>
               </li>
               <li className="flex items-center space-x-2 text-gray-400">
                 <Phone className="h-4 w-4" />
-                <span>+256-757-357-680</span>
+                <span><a href="tel:+256757357680">+256-757-357-680</a></span>
               </li>
               <li className="flex items-center space-x-2 text-gray-400">
                 <MapPin className="h-4 w-4" />
