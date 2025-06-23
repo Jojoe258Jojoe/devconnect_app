@@ -63,7 +63,7 @@ const LandingPage = () => {
             <h1 className="text-6xl md:text-8xl font-bold text-white leading-tight">
               Dev
               <span className="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
-                Collab
+                Connect
               </span>
             </h1>
             
@@ -342,7 +342,7 @@ const CTASection = () => {
           </h2>
           
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Join thousands of developers who are already collaborating, creating, and innovating on DevCollab.
+            Join thousands of developers who are already collaborating, creating, and innovating on Devconnect.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -404,13 +404,13 @@ const Footer = () => {
               The ultimate platform for software engineers to collaborate, share ideas, and create together.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors">
+              <a href="https://github.com/Jojoe258Jojoe" className="text-gray-400 hover:text-primary-400 transition-colors">
                 <Github className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors">
+              <a href="https://x.com/JoeTinyefuza" className="text-gray-400 hover:text-primary-400 transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors">
+              <a href="https://www.linkedin.com/me?trk=p_mwlite_feed-secondary_nav" className="text-gray-400 hover:text-primary-400 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
             </div>
@@ -479,15 +479,15 @@ const Footer = () => {
             <ul className="space-y-2">
               <li className="flex items-center space-x-2 text-gray-400">
                 <Mail className="h-4 w-4" />
-                <span>hello@devcollab.com</span>
+                <span>tinyejoe7@gmail.com</span>
               </li>
               <li className="flex items-center space-x-2 text-gray-400">
                 <Phone className="h-4 w-4" />
-                <span>+1 (555) 123-4567</span>
+                <span>+256-757-357-680</span>
               </li>
               <li className="flex items-center space-x-2 text-gray-400">
                 <MapPin className="h-4 w-4" />
-                <span>San Francisco, CA</span>
+                <span>Kampala, Uganda</span>
               </li>
             </ul>
           </div>
@@ -495,7 +495,7 @@ const Footer = () => {
 
         <div className="border-t border-dark-800 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between">
           <p className="text-gray-400 text-sm">
-            © 2024 DevCollab. All rights reserved.
+            © 2025 Devconnect. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-primary-400 text-sm transition-colors">
