@@ -1,11 +1,13 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { supabase } from '../lib/supabase';
 
 interface User {
   id: string;
   email: string;
   name?: string;
   avatar?: string;
+  provider?: string;
 }
 
 interface AuthState {
@@ -18,6 +20,7 @@ interface AuthState {
   logout: () => Promise<void>;
   resetPassword: (email: string) => Promise<boolean>;
   initialize: () => Promise<void>;
+  updateProfile: (updates: Partial<User>) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -29,28 +32,70 @@ export const useAuthStore = create<AuthState>()(
       
       initialize: async () => {
         set({ loading: true });
-        // Simulate quick initialization
-        setTimeout(() => {
-          set({ loading: false });
-        }, 100);
+        
+        try {
+          // Get current session
+          const { data: { session }, error } = await supabase.auth.getSession();
+          
+          if (error) {
+            console.error('Session error:', error);
+            set({ isAuthenticated: false, user: null, loading: false });
+            return;
+          }
+
+          if (session?.user) {
+            // User is authenticated
+            const user: User = {
+              id: session.user.id,
+              email: session.user.email || '',
+              name: session.user.user_metadata?.full_name || session.user.user_metadata?.name || 'User',
+              avatar: session.user.user_metadata?.avatar_url || session.user.user_metadata?.picture,
+              provider: session.user.app_metadata?.provider
+            };
+
+            set({
+              isAuthenticated: true,
+              user,
+              loading: false
+            });
+          } else {
+            set({ isAuthenticated: false, user: null, loading: false });
+          }
+        } catch (error) {
+          console.error('Initialize error:', error);
+          set({ isAuthenticated: false, user: null, loading: false });
+        }
       },
       
       login: async (email: string, password: string) => {
         try {
-          // Mock login - replace with real auth later
-          const mockUser = {
-            id: '1',
+          const { data, error } = await supabase.auth.signInWithPassword({
             email,
-            name: 'Demo User',
-            avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
-          };
-          
-          set({
-            isAuthenticated: true,
-            user: mockUser
+            password,
           });
+
+          if (error) {
+            console.error('Login error:', error);
+            return false;
+          }
+
+          if (data.user) {
+            const user: User = {
+              id: data.user.id,
+              email: data.user.email || '',
+              name: data.user.user_metadata?.full_name || 'User',
+              avatar: data.user.user_metadata?.avatar_url,
+              provider: 'email'
+            };
+
+            set({
+              isAuthenticated: true,
+              user
+            });
+            return true;
+          }
           
-          return true;
+          return false;
         } catch (error) {
           console.error('Login error:', error);
           return false;
@@ -59,19 +104,23 @@ export const useAuthStore = create<AuthState>()(
 
       loginWithGoogle: async () => {
         try {
-          // Mock Google login
-          const mockUser = {
-            id: '1',
-            email: 'user@gmail.com',
-            name: 'Google User',
-            avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
-          };
-          
-          set({
-            isAuthenticated: true,
-            user: mockUser
+          const { data, error } = await supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+              redirectTo: `${window.location.origin}/auth/callback`,
+              queryParams: {
+                access_type: 'offline',
+                prompt: 'consent',
+              },
+            },
           });
-          
+
+          if (error) {
+            console.error('Google login error:', error);
+            return false;
+          }
+
+          // OAuth redirect will handle the rest
           return true;
         } catch (error) {
           console.error('Google login error:', error);
@@ -81,20 +130,38 @@ export const useAuthStore = create<AuthState>()(
       
       register: async (email: string, password: string, name: string, username: string) => {
         try {
-          // Mock registration
-          const mockUser = {
-            id: '1',
+          const { data, error } = await supabase.auth.signUp({
             email,
-            name,
-            avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
-          };
-          
-          set({
-            isAuthenticated: true,
-            user: mockUser
+            password,
+            options: {
+              data: {
+                full_name: name,
+                username: username,
+              },
+            },
           });
+
+          if (error) {
+            console.error('Registration error:', error);
+            return false;
+          }
+
+          if (data.user) {
+            const user: User = {
+              id: data.user.id,
+              email: data.user.email || '',
+              name: name,
+              provider: 'email'
+            };
+
+            set({
+              isAuthenticated: true,
+              user
+            });
+            return true;
+          }
           
-          return true;
+          return false;
         } catch (error) {
           console.error('Registration error:', error);
           return false;
@@ -102,15 +169,43 @@ export const useAuthStore = create<AuthState>()(
       },
       
       logout: async () => {
-        set({
-          isAuthenticated: false,
-          user: null
-        });
+        try {
+          await supabase.auth.signOut();
+        } catch (error) {
+          console.error('Logout error:', error);
+        } finally {
+          set({
+            isAuthenticated: false,
+            user: null
+          });
+        }
       },
       
       resetPassword: async (email: string) => {
-        // Mock password reset
-        return true;
+        try {
+          const { error } = await supabase.auth.resetPasswordForEmail(email, {
+            redirectTo: `${window.location.origin}/auth/reset-password`,
+          });
+
+          if (error) {
+            console.error('Reset password error:', error);
+            return false;
+          }
+
+          return true;
+        } catch (error) {
+          console.error('Reset password error:', error);
+          return false;
+        }
+      },
+
+      updateProfile: (updates: Partial<User>) => {
+        const currentUser = get().user;
+        if (currentUser) {
+          set({
+            user: { ...currentUser, ...updates }
+          });
+        }
       },
     }),
     {

@@ -5,6 +5,7 @@ import { Mail, Lock, User, Eye, EyeOff, ArrowLeft, CheckCircle } from 'lucide-re
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useAuthStore } from '../store/authStore';
+import GoogleAuthButton from '../components/GoogleAuthButton';
 
 type AuthMode = 'signin' | 'signup' | 'forgot';
 
@@ -37,7 +38,7 @@ const Auth = () => {
         if (success) {
           setShowSuccess(true);
           setTimeout(() => {
-            navigate('/');
+            navigate('/dashboard');
           }, 2000);
         } else {
           toast.error('Invalid credentials');
@@ -52,7 +53,7 @@ const Auth = () => {
         if (success) {
           setShowSuccess(true);
           setTimeout(() => {
-            navigate('/');
+            navigate('/dashboard');
           }, 2000);
         } else {
           toast.error('Failed to create account');
@@ -77,6 +78,15 @@ const Auth = () => {
     setMode(newMode);
     reset();
     setShowSuccess(false);
+  };
+
+  const handleGoogleSuccess = () => {
+    // Google auth will handle the redirect
+    toast.success('Redirecting to Google...');
+  };
+
+  const handleGoogleError = (error: string) => {
+    toast.error(`Google sign-in failed: ${error}`);
   };
 
   // Success overlay
@@ -125,7 +135,7 @@ const Auth = () => {
             transition={{ delay: 0.6 }}
             className="text-primary-400"
           >
-            Redirecting to homepage...
+            Redirecting to dashboard...
           </motion.div>
         </motion.div>
       </div>
@@ -167,6 +177,26 @@ const Auth = () => {
               {mode === 'forgot' && 'Enter your email to reset password'}
             </p>
           </div>
+
+          {/* Google Auth Button */}
+          {mode !== 'forgot' && (
+            <div className="mb-6">
+              <GoogleAuthButton
+                onSuccess={handleGoogleSuccess}
+                onError={handleGoogleError}
+                redirectTo="/dashboard"
+              />
+              
+              <div className="relative my-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-600"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-dark-800 text-gray-400">Or continue with email</span>
+                </div>
+              </div>
+            </div>
+          )}
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {mode === 'signup' && (

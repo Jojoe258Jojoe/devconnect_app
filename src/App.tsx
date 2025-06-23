@@ -2,6 +2,7 @@ import React, { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
+import AuthCallback from './components/AuthCallback';
 import { useAuthStore } from './store/authStore';
 
 // Lazy load components for better performance
@@ -43,6 +44,7 @@ function App() {
             {/* Public Routes */}
             <Route path="/" element={<LandingPage />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/auth/callback" element={<AuthCallback />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/flowchart" element={<FlowchartCreator />} />
             <Route path="/code-generator" element={<CodeGenerator />} />
