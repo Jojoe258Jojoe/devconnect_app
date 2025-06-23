@@ -397,7 +397,7 @@ const Footer = () => {
             <div className="flex items-center space-x-2">
               <Code2 className="h-8 w-8 text-primary-400" />
               <span className="text-xl font-bold bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
-                DevCollab
+                DevConnect
               </span>
             </div>
             <p className="text-gray-400 leading-relaxed">
