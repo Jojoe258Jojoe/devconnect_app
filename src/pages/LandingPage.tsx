@@ -413,6 +413,9 @@ const Footer = () => {
               <a href="https://www.linkedin.com/in/tinyefuza-joe-274234306" className="text-gray-400 hover:text-primary-400 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
+              <a href="https://linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=tinyefuza-joe-274234306" className="text-gray-400 hover:text-primary-400 transition-colors">
+                <Linkedin className="h-5 w-5" />
+              </a>
             </div>
           </div>
 
@@ -451,12 +454,12 @@ const Footer = () => {
             <h3 className="text-lg font-semibold text-white">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors">
+                <a href="https://linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=tinyefuza-joe-274234306" className="text-gray-400 hover:text-primary-400 transition-colors">
                   Documentation
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors">
+                <a href="https://linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=tinyefuza-joe-274234306" className="text-gray-400 hover:text-primary-400 transition-colors">
                   API Reference
                 </a>
               </li>
