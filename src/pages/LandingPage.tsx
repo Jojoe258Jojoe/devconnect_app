@@ -410,7 +410,7 @@ const Footer = () => {
               <a href="https://x.com/JoeTinyefuza" className="text-gray-400 hover:text-primary-400 transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="https://www.linkedin.com/me?trk=p_mwlite_feed-secondary_nav" className="text-gray-400 hover:text-primary-400 transition-colors">
+              <a href="https://www.linkedin.com/in/tinyefuza-joe-274234306" className="text-gray-400 hover:text-primary-400 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
             </div>
@@ -461,7 +461,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors">
+                <a href="https://linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=tinyefuza-joe-274234306" className="text-gray-400 hover:text-primary-400 transition-colors">
                   Tutorials
                 </a>
               </li>
