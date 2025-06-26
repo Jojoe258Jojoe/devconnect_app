@@ -44,11 +44,11 @@ const LandingPage = () => {
           className="fixed top-4 right-4 z-50"
         >
           <div className="relative group">
-            <img 
+            <a href= "https://bolt.new/"><img 
               src="/black_circle_360x360 (1).png" 
               alt="Powered by Bolt" 
               className="w-16 h-16 md:w-20 md:h-20 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12 cursor-pointer"
-            />
+            /></a>
             <div className="absolute -inset-2 bg-primary-400/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
         </motion.div>
