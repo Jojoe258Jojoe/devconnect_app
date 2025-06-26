@@ -36,6 +36,23 @@ const LandingPage = () => {
     <div className="relative overflow-hidden">
       {/* Hero Section with Parallax */}
       <section className="relative min-h-screen flex items-center justify-center bg-main-gradient">
+        {/* Badge in top-right corner */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8, x: 50 }}
+          animate={{ opacity: 1, scale: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="fixed top-4 right-4 z-50"
+        >
+          <div className="relative group">
+            <img 
+              src="/black_circle_360x360 (1).png" 
+              alt="Powered by Bolt" 
+              className="w-16 h-16 md:w-20 md:h-20 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12 cursor-pointer"
+            />
+            <div className="absolute -inset-2 bg-primary-400/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+        </motion.div>
+
         <div 
           className="absolute inset-0 opacity-20"
           style={{
