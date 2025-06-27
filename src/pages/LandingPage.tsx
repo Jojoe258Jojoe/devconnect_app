@@ -107,7 +107,7 @@ const LandingPage = () => {
                   whileTap={{ scale: 0.95 }}
                   className="bg-white/10 backdrop-blur-md text-white px-8 py-4 rounded-xl font-semibold text-lg border border-white/20 hover:bg-white/20 transition-all duration-300"
                 >
-                  <a href="https://youtu.be/jPRtZutVM-0?si=be04BK8dwo1dJmmT">Watch Demo</a>
+                  <a href="https://vimeo.com/1096925346/5eb14eb553?share=copy">Watch Demo</a>
                 </motion.button>
               </div>
             )}
